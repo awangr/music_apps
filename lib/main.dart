@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:music_apps/view/screen/bottom_nav_screen.dart';
+import 'package:music_apps/view/screen/home_screeen.dart';
 import 'package:music_apps/view/screen/login_screen.dart';
 
 void main() {
@@ -13,6 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false, home: const Login());
+      home: Login(),
+      initialRoute: '/',
+      debugShowCheckedModeBanner: false,
+    );
   }
 }

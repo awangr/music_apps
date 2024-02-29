@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/common/style/app_color.dart';
 import 'package:music_apps/common/widget/bg_image.dart';
+import 'package:music_apps/view/screen/bottom_nav_screen.dart';
 
 import '../../common/style/app_textstyle.dart';
 
@@ -47,7 +47,9 @@ Widget get body {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll<Color>(orange)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(BottomScreen());
+                    },
                     child: Text(
                       'Get Started',
                       style: TextStyle(
