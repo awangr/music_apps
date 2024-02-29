@@ -1,8 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/common/style/app_color.dart';
 import 'package:music_apps/common/widget/bg_image.dart';
-import 'package:music_apps/view/screen/bottom_nav_screen.dart';
+import 'package:music_apps/view/screen/salomon_screen.dart';
 
 import '../../common/style/app_textstyle.dart';
 
@@ -15,6 +17,21 @@ class Login extends StatelessWidget {
       child: Stack(
         children: [
           BgImage(),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 2.0),
+                child: Container(
+                  // the size where the blurring starts
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  color: Colors.black26.withOpacity(0.2),
+                ),
+              ),
+            ),
+          ),
           body,
         ],
       ),
@@ -63,7 +80,6 @@ Widget get body {
             width: 220,
             child: Text(
               'by continuing you agree to terms of services and  Privacy policy',
-              //textAlign: TextAlign.center,
               style: TextStyle(color: grey),
             ),
           ),

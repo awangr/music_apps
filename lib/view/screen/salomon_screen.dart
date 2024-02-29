@@ -5,16 +5,16 @@ import 'package:music_apps/common/widget/page_transition.dart';
 import 'package:music_apps/view/screen/library_screen.dart';
 import 'package:music_apps/view/screen/search_screen.dart';
 import 'package:get/get.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'home_screeen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:music_apps/common/style/app_color.dart';
 
 final controller = HomeController();
 
 class BottomScreen extends StatelessWidget {
   final List<Widget> listPage = [
-    const SearchScreen(),
     const HomeScreen(),
+    const SearchScreen(),
     const LibraryScreen(),
   ];
   final pageController = PageController();
@@ -25,6 +25,7 @@ class BottomScreen extends StatelessWidget {
             child: listPage[controller.currentBottomIndex.value])),
         bottomNavigationBar: Obx(() {
           return SalomonBottomBar(
+              backgroundColor: transparant,
               onTap: controller.switchBottomNav,
               currentIndex: controller.currentBottomIndex.value,
               items: DataBottomModel.listBottomModel
@@ -33,14 +34,6 @@ class BottomScreen extends StatelessWidget {
                       activeIcon: e.nonActiveIcon,
                       title: Text('${e.label}')))
                   .toList());
-        })
-        /* ConvexAppBar(
-            onTap: controller.switchBottomNav,
-            initialActiveIndex: controller.currentBottomIndex.value,
-            items: DataBottomModel.listBottomModel
-                .map((e) =>
-                    TabItem(icon: e.nonActiveIcon, activeIcon: e.activeIcon))
-                .toList())*/
-        );
+        }));
   }
 }
