@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/common/data/controller/home_controller.dart';
+import 'package:music_apps/common/style/app_color.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 final controller = Get.put(HomeController());
-final _controller = PageController(viewportFraction: 0.8);
+final _controller = PageController(viewportFraction: 0.8, keepPage: true);
 
-class CarouselWidget extends StatelessWidget {
+class CarouselWidget extends StatefulWidget {
   const CarouselWidget({super.key});
 
+  @override
+  State<CarouselWidget> createState() => _CarouselWidgetState();
+}
+
+class _CarouselWidgetState extends State<CarouselWidget> {
   @override
   Widget build(BuildContext contesxt) {
     return SizedBox(
       height: 300,
+      width: MediaQuery.of(context).size.width,
       child: PageView.builder(
+        reverse: true,
         scrollDirection: Axis.horizontal,
         itemCount: controller.listSlider.length,
         controller: _controller,
         itemBuilder: (context, index) => Container(
-          height: 300,
+          margin: EdgeInsets.only(right: 20),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.amber,
@@ -61,13 +69,22 @@ class SmothPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SmoothPageIndicator(
-        onDotClicked: (index) {
-          controller.currentSlide(index);
-        },
-        controller: _controller,
-        count: controller.listSlider.length,
-        effect: WormEffect(dotColor: Colors.white),
+      child: Obx(
+        () => SmoothPageIndicator(
+          textDirection: TextDirection.ltr,
+          controller: _controller,
+          onDotClicked: (index) {
+            _controller.jumpToPage(index);
+            print(index.toString());
+          },
+          count: controller.listSlider.length,
+          effect: WormEffect(
+            dotWidth: 11,
+            dotHeight: 10,
+            dotColor: Colors.white,
+            activeDotColor: orange,
+          ),
+        ),
       ),
     );
   }

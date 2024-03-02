@@ -5,6 +5,7 @@ import 'package:music_apps/common/widget/page_transition.dart';
 import 'package:music_apps/view/screen/library_screen.dart';
 import 'package:music_apps/view/screen/search_screen.dart';
 import 'package:get/get.dart';
+import 'fav_screen.dart';
 import 'home_screeen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:music_apps/common/style/app_color.dart';
@@ -15,6 +16,7 @@ class BottomScreen extends StatelessWidget {
   final List<Widget> listPage = [
     const HomeScreen(),
     const SearchScreen(),
+    const FavScreen(),
     const LibraryScreen(),
   ];
   final pageController = PageController();
@@ -23,17 +25,24 @@ class BottomScreen extends StatelessWidget {
     return Scaffold(
         body: Obx(() => PageTransition(
             child: listPage[controller.currentBottomIndex.value])),
-        bottomNavigationBar: Obx(() {
-          return SalomonBottomBar(
-              backgroundColor: transparant,
-              onTap: controller.switchBottomNav,
-              currentIndex: controller.currentBottomIndex.value,
-              items: DataBottomModel.listBottomModel
-                  .map((e) => SalomonBottomBarItem(
-                      icon: e.activeIcon,
-                      activeIcon: e.nonActiveIcon,
-                      title: Text('${e.label}')))
-                  .toList());
-        }));
+        bottomNavigationBar: salomon());
+  }
+
+  ///BOTTOM NAVBAR
+  Obx salomon() {
+    return Obx(() {
+      return SalomonBottomBar(
+          unselectedItemColor: Colors.white,
+          selectedItemColor: orange,
+          backgroundColor: black,
+          onTap: controller.switchBottomNav,
+          currentIndex: controller.currentBottomIndex.value,
+          items: DataBottomModel.listBottomModel
+              .map((e) => SalomonBottomBarItem(
+                  icon: e.activeIcon,
+                  activeIcon: e.nonActiveIcon,
+                  title: Text('${e.label}')))
+              .toList());
+    });
   }
 }

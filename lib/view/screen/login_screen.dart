@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/common/style/app_color.dart';
 import 'package:music_apps/common/widget/bg_image.dart';
-import 'package:music_apps/view/screen/salomon_screen.dart';
+import 'package:music_apps/view/screen/main_screen.dart';
 
 import '../../common/style/app_textstyle.dart';
 
