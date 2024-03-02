@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:music_apps/common/style/app_asset.dart';
 import 'package:music_apps/common/style/app_color.dart';
 
 import '../../common/widget/carousel.dart';
@@ -28,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
               SmothPage(),
               SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -48,6 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 5,
                   itemBuilder: (context, index) => Container(
                     decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(AppAsset.slide),
+                            fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.amber),
                     margin: EdgeInsets.symmetric(horizontal: 10),
@@ -57,7 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           horizontal: 6, vertical: 4),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [Text('Judul'), Text('Tahun')],
+                        children: [
+                          Text(
+                            'Judul',
+                            style: TextStyle(color: white),
+                          ),
+                          Text('Tahun', style: TextStyle(color: white))
+                        ],
                       ),
                     ),
                   ),
@@ -95,8 +106,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return Card(
+                      color: grey.withOpacity(0.2),
+                      elevation: 5,
                       child: ListTile(
                         leading: CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/images/slider/home.png'),
                           backgroundColor: orange,
                         ),
                         trailing: Icon(Icons.menu),
