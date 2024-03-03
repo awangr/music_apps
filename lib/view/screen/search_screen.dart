@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:music_apps/common/style/app_asset.dart';
 import 'package:music_apps/common/style/app_color.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -65,8 +66,31 @@ class SearchScreen extends StatelessWidget {
                   crossAxisSpacing: 20),
               itemBuilder: (context, index) {
                 return Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 55,
+                          decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Text(
+                            'Dangdut',
+                            style: TextStyle(color: white),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   decoration: BoxDecoration(
-                      color: orange, borderRadius: BorderRadius.circular(20)),
+                      image: DecorationImage(
+                          image: AssetImage(AppAsset.slide), fit: BoxFit.cover),
+                      borderRadius: BorderRadius.circular(20)),
                 );
               },
             )
