@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:music_apps/common/data/controller/home_controller.dart';
 import 'package:music_apps/common/data/models/bottom_model.dart';
 import 'package:music_apps/common/widget/page_transition.dart';
-import 'package:music_apps/view/screen/library_screen.dart';
 import 'package:music_apps/view/screen/search_screen.dart';
 import 'package:get/get.dart';
 import 'fav_screen.dart';
@@ -17,7 +16,6 @@ class BottomScreen extends StatelessWidget {
     const HomeScreen(),
     const SearchScreen(),
     const FavScreen(),
-    const LibraryScreen(),
   ];
   final pageController = PageController();
   @override

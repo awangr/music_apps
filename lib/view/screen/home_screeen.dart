@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/common/style/app_asset.dart';
 import 'package:music_apps/common/style/app_color.dart';
@@ -106,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return Card(
-                      color: grey.withOpacity(0.2),
+                      color: transparant,
                       elevation: 5,
                       child: ListTile(
                         leading: CircleAvatar(
@@ -117,7 +115,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         trailing: Icon(Icons.menu),
                         title: Text(
                           'Penyanyi',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: white, fontWeight: FontWeight.bold),
                         ),
                         subtitle: Text('Tahun * Judul'),
                       ),

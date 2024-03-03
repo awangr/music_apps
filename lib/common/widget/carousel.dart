@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/common/data/controller/home_controller.dart';
-import 'package:music_apps/common/style/app_color.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 final controller = Get.put(HomeController());
-final _controller = PageController(viewportFraction: 0.8, keepPage: true);
+final _controller = PageController(keepPage: true, initialPage: 0);
 
 class CarouselWidget extends StatefulWidget {
   const CarouselWidget({super.key});
@@ -15,12 +14,18 @@ class CarouselWidget extends StatefulWidget {
 }
 
 class _CarouselWidgetState extends State<CarouselWidget> {
+  int currPge = 0;
   @override
   Widget build(BuildContext contesxt) {
     return SizedBox(
       height: 300,
       width: MediaQuery.of(context).size.width,
       child: PageView.builder(
+        // onPageChanged: (int i) {
+        //   setState(() {
+        //     currPge = i;
+        //   });
+        // },
         reverse: true,
         scrollDirection: Axis.horizontal,
         itemCount: controller.listSlider.length,
@@ -71,19 +76,18 @@ class SmothPage extends StatelessWidget {
     return Center(
       child: Obx(
         () => SmoothPageIndicator(
-          textDirection: TextDirection.ltr,
           controller: _controller,
           onDotClicked: (index) {
             _controller.jumpToPage(index);
             print(index.toString());
           },
           count: controller.listSlider.length,
-          effect: WormEffect(
-            dotWidth: 11,
-            dotHeight: 10,
-            dotColor: Colors.white,
-            activeDotColor: orange,
-          ),
+          // effect: WormEffect(
+          //   dotWidth: 11,
+          //   dotHeight: 10,
+          //   //  dotColor: Colors.white,
+          //   // activeDotColor: orange,
+          // ),
         ),
       ),
     );

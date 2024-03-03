@@ -14,7 +14,5 @@ class DataBottomModel {
     BottomModel(Icon(Icons.search), Icon(Icons.search_outlined), 'search'),
     BottomModel(
         Icon(Icons.favorite), Icon(Icons.favorite_outlined), 'favorite'),
-    BottomModel(Icon(Icons.library_books), Icon(Icons.library_books_outlined),
-        'library')
   ];
 }
