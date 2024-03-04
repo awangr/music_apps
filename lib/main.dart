@@ -1,11 +1,19 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+// import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
-import 'package:music_apps/view/screen/login_screen.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+
+import 'ui/home/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  // AssetsAudioPlayer.addNotificationOpenAction((notification) {
+  //   return true;
+  // });
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +25,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       scrollBehavior: ScrollBehavior().copyWith(
           dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse}),
-      home: Login(),
+      home: HomePage(),
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
     );
