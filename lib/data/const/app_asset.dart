@@ -4,7 +4,7 @@ class AppAsset {
   static const bon = 'assets/music/pic/bon.jpg';
   static const kris = 'assets/music/pic/kris.jpg';
   static const madi = 'assets/music/pic/madi.png';
-  static const afgan = 'assets/music/pic/madi.png';
+  static const afgan = 'assets/music/pic/percaya.jpg';
   //music file
   static const badliar = 'assets/music/bad_liar.mp3';
   static const always = 'assets/music/always.mp3';
