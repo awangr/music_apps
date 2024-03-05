@@ -8,8 +8,8 @@ class MusicController extends GetxController {
   final player = AudioPlayer();
   RxList<Music> rxListmusic = AppMusic.listMusic.obs;
   RxList<Music> listMusic = <Music>[].obs;
-  RxInt _currIndex = 0.obs;
-  int get currIndex => _currIndex.value;
+  RxInt playId = RxInt(-1);
+  int get currIndex => playId.value;
   List<Music> get listmusic2 => rxListmusic;
   RxList<Music> listCategory = <Music>[].obs;
   //Function
@@ -20,11 +20,31 @@ class MusicController extends GetxController {
     // filteredNew;
   }
 
-  void play({int i = 0}) {
+  @override
+  void onInit() {
+    player.playerStateStream.listen((event) {
+      if (event.processingState == ProcessingState.completed) {
+        if (playId.value < rxListmusic.length - 1) {
+          playId.value++;
+          next();
+        } else {
+          player.stop();
+        }
+      }
+    });
+    super.onInit();
+  }
+
+  void play(int id) async {
+    final index = rxListmusic.indexWhere((music) => music.id == id);
+    print('Indexxxxxxxxxxx ${index}');
     isplaying.value = true;
-    _currIndex.value = i;
-    player.setFilePath(rxListmusic[currIndex].path);
-    player.play();
+    if (index != -1) {
+      playId.value = index;
+      await player.setFilePath(rxListmusic[currIndex].path);
+      player.play();
+    }
+    playId.value = id;
   }
 
   void stop() {
@@ -34,15 +54,15 @@ class MusicController extends GetxController {
 
   void next() {
     if (currIndex < rxListmusic.length - 1) {
-      _currIndex.value++;
-      play();
+      playId.value++;
+      play(rxListmusic[currIndex].id);
     }
   }
 
   void previous() {
     if (currIndex > 0) {
-      _currIndex.value--;
-      play();
+      playId.value--;
+      play(rxListmusic[currIndex].id);
     }
   }
 

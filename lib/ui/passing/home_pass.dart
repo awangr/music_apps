@@ -15,6 +15,7 @@ class TopAlbum extends StatefulWidget {
 class _TopAlbumState extends State<TopAlbum> {
   @override
   Widget build(BuildContext context) {
+    //controller.addToPlaylist(controller.listMusic);
     return ListView.builder(
       shrinkWrap: true,
       itemCount: widget.music.length,
@@ -36,10 +37,10 @@ class _TopAlbumState extends State<TopAlbum> {
                   if (controller.isplaying.value) {
                     controller.stop();
                   } else {
-                    controller.play();
+                    controller.play(musics.id);
                   }
                 },
-                icon: Obx(() => Icon(controller.isplaying.value
+                icon: Obx(() => Icon(controller.playId == musics.id
                     ? Icons.stop
                     : Icons.play_arrow))),
           ),
