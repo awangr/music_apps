@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/data/controller/music_controller.dart';
-import 'package:music_apps/ui/passing/home_pass.dart';
+import 'package:music_apps/ui/passing/home_view.dart';
 
 final controller = Get.put(MusicController());
 
