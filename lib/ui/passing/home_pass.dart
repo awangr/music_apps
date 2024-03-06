@@ -16,37 +16,75 @@ class _TopAlbumState extends State<TopAlbum> {
   @override
   Widget build(BuildContext context) {
     //controller.addToPlaylist(controller.listMusic);
-    return ListView.builder(
-      shrinkWrap: true,
+    return GridView.builder(
       itemCount: widget.music.length,
+      shrinkWrap: true,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 9 / 4,
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+      ),
       itemBuilder: (context, index) {
         Music musics = widget.music[index];
-        return Card(
-          elevation: 6,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage(musics.image),
+        return Padding(
+          padding: const EdgeInsets.all(10),
+          child: Card(
+            elevation: 7,
+            child: ListTile(
+              onTap: () {
+                controller.play(musics.id);
+              },
+              subtitle: Text(musics.penyanyi),
+              leading: CircleAvatar(
+                backgroundImage: AssetImage(musics.image),
+              ),
+              title: Text(musics.judul),
             ),
-            title: Text(
-              musics.judul,
-              style: TextStyle(color: Colors.black),
-            ),
-            subtitle: Text(musics.penyanyi),
-            trailing: IconButton(
-                onPressed: () {
-                  if (controller.isplaying.value) {
-                    controller.stop();
-                  } else {
-                    controller.play(musics.id);
-                  }
-                },
-                icon: Obx(() => Icon(controller.playId == musics.id
-                    ? Icons.stop
-                    : Icons.play_arrow))),
           ),
         );
       },
-    );
+    ); //ListView.builder(
+    //   shrinkWrap: true,
+    //   itemCount: widget.music.length,
+    //   itemBuilder: (context, index) {
+    //     Music musics = widget.music[index];
+    //     return Column(
+    //       children: [
+    //         Card(
+    //           elevation: 6,
+    //           child: ListTile(
+    //             onTap: () {
+    //               // showModalBottomSheet(
+    //               //   context: context,
+    //               //   builder: (context) {
+    //               //     return Container(
+    //               //       width: Get.width,
+    //               //       height: 100,
+    //               //       color: Colors.amber,
+    //               //       child: Text('${controller}'),
+    //               //     );
+    //               //   },
+    //               // );
+    //               // if (controller.isPlaying) {
+    //               //   controller.pause();
+    //               // } else {
+    //               //   controller.play(musics.id);
+    //               // }
+    //             },
+    //             leading: CircleAvatar(
+    //               backgroundImage: AssetImage(musics.image),
+    //             ),
+    //             title: Text(
+    //               musics.judul,
+    //               style: TextStyle(color: Colors.black),
+    //             ),
+    //             subtitle: Text(musics.penyanyi),
+    //           ),
+    //         ),
+    //       ],
+    //     );
+    //   },
+    // );
   }
 }
 

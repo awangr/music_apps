@@ -8,7 +8,9 @@ class Music {
   String image;
   String path;
   Color color;
-  Music(this.id, this.judul, this.penyanyi, this.image, this.path, this.color);
+  bool isPlay;
+  Music(this.id, this.judul, this.penyanyi, this.image, this.path, this.color,
+      {this.isPlay = false});
 }
 
 class AppMusic {

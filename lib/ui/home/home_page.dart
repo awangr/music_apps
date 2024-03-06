@@ -18,10 +18,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            ListTile(
+              title: Text('data'),
+            ),
+            ListTile(title: Text('data')),
+            ListTile(title: Text('data')),
+            ListTile(title: Text('data'))
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text('Music Player'),
         centerTitle: true,
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.list)),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
       ),
       body: SingleChildScrollView(
@@ -51,9 +62,7 @@ class _HomePageState extends State<HomePage> {
                   } else {
                     return GetBuilder(
                       builder: (MusicController musicC) {
-                        return TopAlbum(
-                          music: controller.rxListmusic,
-                        );
+                        return TopAlbum(music: controller.rxListmusic);
                       },
                     );
                   }
