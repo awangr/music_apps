@@ -3,17 +3,15 @@ import 'package:just_audio/just_audio.dart';
 import 'package:music_apps/data/model/music_model.dart';
 
 class MusicController extends GetxController {
-  RxBool _isplaying = false.obs;
-  bool get isPlaying => _isplaying.value;
-  final isLoading = false.obs;
-  Duration lastPosition = Duration.zero;
-  final player = AudioPlayer();
   RxList<Music> rxListmusic = AppMusic.listMusic.obs;
-  RxList<Music> listMusic = <Music>[].obs;
+  RxList<Music> listGendre = AppGendre.listGendre.obs;
+  RxBool _isplaying = false.obs;
+  RxBool isLoading = false.obs;
+  AudioPlayer player = AudioPlayer();
   RxInt playId = RxInt(0);
+  bool get isPlaying => _isplaying.value;
   int get currIndex => playId.value;
-  List<Music> get listmusic2 => rxListmusic;
-  RxList<Music> listCategory = <Music>[].obs;
+
   // //Function
   Future<void> delay() async {
     isLoading.value = true;
@@ -41,10 +39,9 @@ class MusicController extends GetxController {
   void play(int id) async {
     final index = rxListmusic.indexWhere((music) => music.id == id);
     print('Indexxxxxxxxxxx ${index}');
-    rxListmusic[id].isPlay = true;
+    //rxListmusic[id].isPlay = true;
     playId.value = index;
     player.play();
-    player.seek(lastPosition);
 
     //proses pengambilan data music dari file
     await player.setFilePath(rxListmusic[currIndex].path);
@@ -56,7 +53,6 @@ class MusicController extends GetxController {
   void pause() {
     _isplaying.value = false;
     player.pause();
-    lastPosition = player.position;
   }
 
   void next() {
@@ -83,64 +79,4 @@ class MusicController extends GetxController {
     player.dispose();
     super.dispose();
   }
-  // AudioPlayer player = AudioPlayer();
-  // //////////////////// Variable Getx  ////////////////////////
-  // RxList<Music> _listMusics = AppMusic.listMusic.obs;
-  // RxBool _isPlaying = false.obs;
-  // RxInt _currentSongIndex = 0.obs;
-  // Rx<Duration> _position = Duration().obs;
-  // Rx<Duration> _duration = Duration().obs;
-  // //////////////////   Getx ke biasa  ////////////////////////
-  // List get listMusics => _listMusics;
-  // bool get isPlaying => _isPlaying.value;
-  // int get currentSongIndex => _currentSongIndex.value;
-  // Duration get position => _position.value;
-  // Duration get duration => _duration.value;
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   player.durationStream.listen((d) {
-  //     _duration.value = d!;
-  //   });
-  //   player.durationStream.listen((p) {
-  //     _position.value = p!;
-  //   });
-  // }
-
-  // void playMusic(int id) async {
-  //   final index = rxListmusic.indexWhere((music) => music.id == id);
-  //   await player.setFilePath(_listMusics[currentSongIndex].path);
-  //   _isPlaying.value = true;
-  //   _currentSongIndex.value = index;
-  //   _currentSongIndex.value = id;
-  // }
-
-  // void pauseMusic() {
-  //   player.pause();
-  //   _isPlaying.value = false;
-  // }
-
-  // void stopMusic() {
-  //   player.stop();
-  //   _isPlaying.value = false;
-  // }
-
-  // void nextMusic() {
-  //   if (currentSongIndex < _listMusics.length - 1) {
-  //     _currentSongIndex.value++;
-  //     playMusic(_listMusics[currentSongIndex].id);
-  //   }
-  // }
-
-  // void previousMusic() {
-  //   if (currentSongIndex > 0) {
-  //     _currentSongIndex.value--;
-  //   }
-  //   playMusic(_listMusics[currentSongIndex].id);
-  // }
-
-  // void seekMusic(int second) {
-  //   Duration newDuration = Duration(seconds: second);
-  //   player.seek(newDuration);
-  // }
 }

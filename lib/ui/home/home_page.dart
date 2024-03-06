@@ -5,8 +5,6 @@ import 'package:music_apps/ui/passing/home_view.dart';
 
 final controller = Get.put(MusicController());
 
-enum gendre { All, Hiphop, Jazz, Pop, Dangdut }
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -41,10 +39,15 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                'Gendre',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+              ),
+              SizedBox(height: 15),
               GetBuilder(
                 builder: (MusicController controller) {
-                  return ListCategory(
-                    category: controller.rxListmusic,
+                  return ListGendre(
+                    gendre: controller.listGendre,
                   );
                 },
               ),

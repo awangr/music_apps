@@ -2,8 +2,71 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/data/controller/music_controller.dart';
 import 'package:music_apps/data/model/music_model.dart';
+import 'package:blurrycontainer/blurrycontainer.dart';
 
 final controller = Get.put(MusicController());
+
+class ListGendre extends StatefulWidget {
+  const ListGendre({super.key, required this.gendre});
+  final List<Music> gendre;
+
+  @override
+  State<ListGendre> createState() => _ListGendreState();
+}
+
+class _ListGendreState extends State<ListGendre> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 250,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.gendre.length,
+        itemBuilder: (context, index) {
+          Music musics = widget.gendre[index];
+          //for gendre
+          final gendreVal = Gendre.values[index];
+          final enumGender = Music.enumToString(gendreVal);
+          return Container(
+            child: Column(
+              children: [
+                Container(
+                  width: Get.width,
+                  height: 200,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15)),
+                      image: DecorationImage(
+                          image: AssetImage(musics.image), fit: BoxFit.cover)),
+                ),
+                BlurryContainer(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)),
+                    color: Colors.white.withOpacity(0.4),
+                    width: Get.width,
+                    height: 50,
+                    child: Text(
+                      '${enumGender}',
+                      style: TextStyle(color: Colors.amber),
+                    ))
+              ],
+            ),
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            height: 243,
+            width: 168,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [BoxShadow(blurRadius: 4, offset: Offset(4, 7))],
+                borderRadius: BorderRadius.circular(20)),
+          );
+        },
+      ),
+    );
+  }
+}
 
 class TopAlbum extends StatefulWidget {
   const TopAlbum({super.key, required this.music});
@@ -15,14 +78,12 @@ class TopAlbum extends StatefulWidget {
 class _TopAlbumState extends State<TopAlbum> {
   @override
   Widget build(BuildContext context) {
-    //controller.addToPlaylist(controller.listMusic);
     return GridView.builder(
       itemCount: widget.music.length,
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         childAspectRatio: 9 / 4,
         crossAxisCount: 2,
-        crossAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
         Music musics = widget.music[index];
@@ -85,58 +146,5 @@ class _TopAlbumState extends State<TopAlbum> {
     //     );
     //   },
     // );
-  }
-}
-
-class ListCategory extends StatefulWidget {
-  const ListCategory({super.key, required this.category});
-  final List<Music> category;
-
-  @override
-  State<ListCategory> createState() => _ListCategoryState();
-}
-
-class _ListCategoryState extends State<ListCategory> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 250,
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.category.length,
-        itemBuilder: (context, index) {
-          Music category = widget.category[index];
-          return Container(
-            child: Column(
-              children: [
-                Container(
-                  width: Get.width,
-                  height: 200,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(category.image),
-                          fit: BoxFit.cover)),
-                ),
-                Container(
-                  width: Get.width,
-                  height: 50,
-                  color: Colors.grey.withOpacity(0.1),
-                )
-              ],
-            ),
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            height: 243,
-            width: 168,
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  blurRadius: 4,
-                  offset: Offset(4, 7))
-            ], borderRadius: BorderRadius.circular(20), color: Colors.amber),
-          );
-        },
-      ),
-    );
   }
 }
