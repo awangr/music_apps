@@ -15,6 +15,10 @@ class ListGendre extends StatefulWidget {
 }
 
 class _ListGendreState extends State<ListGendre> {
+  final String text = '''
+aaaaaaaa
+bbbbbbbb
+cccccccc''';
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -45,12 +49,14 @@ class _ListGendreState extends State<ListGendre> {
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20)),
-                    color: Colors.white.withOpacity(0.4),
+                    color: musics.color
+                        .withOpacity(0.8), //Colors.white.withOpacity(0.4),
                     width: Get.width,
                     height: 50,
                     child: Text(
                       '${enumGender}',
-                      style: TextStyle(color: Colors.amber),
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
                     ))
               ],
             ),
@@ -92,10 +98,22 @@ class _TopAlbumState extends State<TopAlbum> {
           child: Card(
             elevation: 7,
             child: ListTile(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
               onTap: () {
-                controller.play(musics.id);
+                //controller.showBottomNav();
+                if (!controller.isPlaying) {
+                  controller.play(musics.id);
+                } else {
+                  controller.pause();
+                }
               },
               subtitle: Text(musics.penyanyi),
+              trailing: Icon(controller.isPlaying ||
+                      controller.rxListmusic[controller.currIndex].isPlay ==
+                          true
+                  ? Icons.pause
+                  : Icons.play_arrow),
               leading: CircleAvatar(
                 backgroundImage: AssetImage(musics.image),
               ),

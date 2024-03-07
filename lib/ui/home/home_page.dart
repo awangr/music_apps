@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_apps/data/controller/music_controller.dart';
+import 'package:music_apps/data/model/music_model.dart';
 import 'package:music_apps/ui/passing/home_view.dart';
 
 final controller = Get.put(MusicController());
@@ -16,6 +17,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Obx(() =>
+          controller.rxListmusic[controller.currIndex].isPlay == true
+              ? controller.showBottomNav()
+              : SizedBox()),
       drawer: Drawer(
         child: Column(
           children: [
@@ -53,11 +58,11 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 15),
               Text(
-                'Top Albums',
+                'Top Songs',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
               ),
               SizedBox(height: 20),
-              FutureBuilder(
+              FutureBuilder<List<Music>?>(
                 future: controller.delay(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
